@@ -1,0 +1,86 @@
+openapi: 3.0.3
+info:
+  title: Match Manager
+  description: a web service for managing soccer matches
+  version: 1.0.0
+servers:
+  - url: http://localhost.STD23089.com
+paths: 
+
+  "/competitions":
+    get:
+      summary: "get list of competions"
+      tags:
+        - "Competitions"
+      parameters:
+        - in: query
+          name: page
+          required: true
+          schema:
+            type: integer
+        - in: query
+          name: pageSize
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: "a list of competitions with their name and the palce where they take place "
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Competitions"
+    
+    post:
+      summary: "create a new competition"
+      tags:
+        - "Competitions"
+      responses:
+        "201":
+          description: "new competitions"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Competitions"
+      requestBody:
+        description: "add a new competition"
+        content:
+          "application/json":
+            schema:
+              $ref: "#/components/schemas/Competitions"
+            
+
+  "/teams":
+    get:
+      summary: "get list of teams"
+      tags:
+        - "Teams"
+      parameters:
+        - in: query
+          name: page
+          required: true
+          schema:
+            type: integer
+        - in: query
+          name: pageSize
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: "a list of teams with their name, slogan, competitions and players"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Team"
+    
+    post:
+      summary: "create a new team"
+      tags:
+        - "Competitions"
+      requestBody:
+        description: "add a new team"
+        content: 
+          "application/json":
+            schema:
+              $ref: "#/components/schemas/TeamCreation"
